@@ -10,6 +10,9 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 from fsm import TocMachine
 from utils import send_text_message
 
+import pygraphviz
+from transitions.extensions import GraphMachine
+
 load_dotenv()
 
 
@@ -28,12 +31,20 @@ machine = TocMachine(
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "advance", 
+            "source": ["state1", "state2"], 
+            "dest": "user",
+            "conditions": "is_going_to_user",
+        },
     ],
     initial="user",
     auto_transitions=False,
     show_conditions=True,
 )
+
+#
+# 
 
 app = Flask(__name__, static_url_path="")
 
