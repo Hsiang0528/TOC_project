@@ -13,4 +13,4 @@ Flask = "==1.0.2"
 pygraphviz = {path = "./pygraphviz-1.7-cp39-cp39-win_amd64.whl"}
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
