@@ -7,11 +7,10 @@ verify_ssl = true
 
 [packages]
 python-dotenv = "==0.10.3"
-
 transitions = "==0.6.9"
 line-bot-sdk = "==1.14.0"
 Flask = "==1.0.2"
-
+pygraphviz = {path = "./pygraphviz-1.7-cp39-cp39-win_amd64.whl"}
 
 [requires]
 python_version = "3.6"
