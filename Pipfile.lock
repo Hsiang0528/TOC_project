@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f6e9e4380f4ed282295ab7c3165f08240b3927f32eccaf362604a3c398924244"
+            "sha256": "c17172ba435deefd718683994f65c9e19158ca2c31971936d0505e270d3e8574"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -426,6 +426,13 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==5.2.0"
+        },
+        "pygraphviz": {
+            "hashes": [
+                "sha256:047d3b71a3ffb8027574a50ca63c226743fcae670bc68211684ae11c6e02675b"
+            ],
+            "path": "./pygraphviz-1.7-cp39-cp39-win_amd64.whl",
+            "version": "==1.7"
         },
         "python-dotenv": {
             "hashes": [
