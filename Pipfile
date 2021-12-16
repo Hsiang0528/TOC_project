@@ -1,16 +1,15 @@
 [[source]]
-name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
-
-[dev-packages]
+name = "pypi"
 
 [packages]
-python-dotenv = "==0.10.3"
-transitions = "==0.6.9"
-line-bot-sdk = "==1.14.0"
-Flask = "==1.0.2"
-pygraphviz = {path = "./pygraphviz-1.7-cp39-cp39-win_amd64.whl"}
+line-bot-sdk = "*"
+flask = "*"
+python-dotenv = "*"
+transitions = "*"
+
+[dev-packages]
 
 [requires]
 python_version = "3.9"
