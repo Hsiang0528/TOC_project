@@ -17,25 +17,204 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
     transitions=[
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
+            "dest": "start",
+            "conditions": "user_to_start",
         },
         {
             "trigger": "advance",
-            "source": "user",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
+            "source": "start",
+            "dest": "I",
+            "conditions": "start_to_I",
         },
         {
-            "trigger": "advance", 
-            "source": ["state1", "state2"], 
+            "trigger": "advance",
+            "source": "start",
+            "dest": "E",
+            "conditions": "start_to_E",
+        },
+        {
+            "trigger": "advance",
+            "source": "I",
+            "dest": "IN",
+            "conditions": "I_to_IN",
+        },
+        {
+            "trigger": "advance",
+            "source": "I",
+            "dest": "IS",
+            "conditions": "I_to_IS",
+        },
+        {
+            "trigger": "advance",
+            "source": "E",
+            "dest": "EN",
+            "conditions": "E_to_EN",
+        },
+        {
+            "trigger": "advance",
+            "source": "E",
+            "dest": "ES",
+            "conditions": "E_to_ES",
+        },
+        {
+            "trigger": "advance",
+            "source": "IN",
+            "dest": "INT",
+            "conditions": "IN_to_INT",
+        },
+        {
+            "trigger": "advance",
+            "source": "IS",
+            "dest": "IST",
+            "conditions": "IS_to_IST",
+        },
+        {
+            "trigger": "advance",
+            "source": "EN",
+            "dest": "ENT",
+            "conditions": "EN_to_ENT",
+        },
+        {
+            "trigger": "advance",
+            "source": "ES",
+            "dest": "EST",
+            "conditions": "ES_to_EST",
+        },
+        {
+            "trigger": "advance",
+            "source": "IN",
+            "dest": "INF",
+            "conditions": "IN_to_INF",
+        },
+        {
+            "trigger": "advance",
+            "source": "IS",
+            "dest": "ISF",
+            "conditions": "IS_to_ISF",
+        },
+        {
+            "trigger": "advance",
+            "source": "EN",
+            "dest": "ENF",
+            "conditions": "EN_to_ENF",
+        },
+        {
+            "trigger": "advance",
+            "source": "ES",
+            "dest": "ESF",
+            "conditions": "ES_to_ESF",
+        },
+        {
+            "trigger": "advance",
+            "source": "INT",
+            "dest": "INTJ",
+            "conditions": "INT_to_INTJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "IST",
+            "dest": "ISTJ",
+            "conditions": "IST_to_ISTJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "ENT",
+            "dest": "ENTJ",
+            "conditions": "ENT_to_ENTJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "EST",
+            "dest": "ESTJ",
+            "conditions": "EST_to_ESTJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "INF",
+            "dest": "INFJ",
+            "conditions": "INF_to_INFJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "ISF",
+            "dest": "ISFJ",
+            "conditions": "ISF_to_ISFJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "ENF",
+            "dest": "ENFJ",
+            "conditions": "ENF_to_ENFJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "ESF",
+            "dest": "ESFJ",
+            "conditions": "ESF_to_ESFJ",
+        },
+        {
+            "trigger": "advance",
+            "source": "INT",
+            "dest": "INTP",
+            "conditions": "INT_to_INTP",
+        },
+        {
+            "trigger": "advance",
+            "source": "IST",
+            "dest": "ISTP",
+            "conditions": "IST_to_ISTP",
+        },
+        {
+            "trigger": "advance",
+            "source": "ENT",
+            "dest": "ENTP",
+            "conditions": "ENT_to_ENTP",
+        },
+        {
+            "trigger": "advance",
+            "source": "EST",
+            "dest": "ESTP",
+            "conditions": "EST_to_ESTP",
+        },
+        {
+            "trigger": "advance",
+            "source": "INF",
+            "dest": "INFP",
+            "conditions": "INF_to_INFP",
+        },
+        {
+            "trigger": "advance",
+            "source": "ISF",
+            "dest": "ISFP",
+            "conditions": "ISF_to_ISFP",
+        },
+        {
+            "trigger": "advance",
+            "source": "ENF",
+            "dest": "ENFP",
+            "conditions": "ENF_to_ENFP",
+        },
+        {
+            "trigger": "advance",
+            "source": "ESF",
+            "dest": "ESFP",
+            "conditions": "ESF_to_ESFP",
+        },
+        {
+            "trigger": "ans_to_user",
+            "source": ["INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
             "dest": "user",
-            "conditions": "is_going_to_user",
+        },
+        {
+            "trigger": "advance",
+            "source": ["start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
+            "dest": "user",
+            "conditions": "go_to_user",
         },
     ],
     initial="user",
@@ -115,7 +294,10 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+            if machine.state == "user" :
+                send_text_message(event.reply_token, "Please type \"START\" to start and you can type\"RESTART\" to restart anytime !")
+            else :
+                send_text_message(event.reply_token, "Please type valid answer !")
 
     return "OK"
 
