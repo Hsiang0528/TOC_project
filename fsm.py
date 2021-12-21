@@ -148,7 +148,7 @@ class TocMachine(GraphMachine):
         print("I'm entering graph")
 
         reply_token = event.reply_token
-        send_image_message(reply_token, "https://upload.cc/i1/2021/12/21/XsEGIL.png")
+        send_image_message(reply_token, "https://upload.cc/i1/2021/12/21/k4qsxn.png")
         self.back()
     #
     def on_enter_user_1(self, event):
