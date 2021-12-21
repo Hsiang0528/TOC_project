@@ -233,13 +233,13 @@ class TocMachine(GraphMachine):
     def on_enter_INTJ(self, event):
         print("I'm entering INTJ")
         reply_token = event.reply_token
-        send_text_message(reply_token, "你是辯論家人格 ENTP\n優點:知識豐富、思想敏銳、善於腦力激盪、精力旺盛、充滿魅力\n缺點:愛唱反調、不能容人、厭惡重複的工作、注意力不集中")
+        send_text_message(reply_token, "你是建築師人格 INTJ\n優點:理性、堅定、獨立、好奇心重、易於成功\n缺點:傲慢、忽視他人情感、憤世嫉俗、競爭性強、缺乏浪漫")
         self.ans_to_user()
 
     def on_enter_ENTJ(self, event):
         print("I'm entering ENTJ")
         reply_token = event.reply_token
-        send_text_message(reply_token, "你是建築師人格 INTJ\n優點:理性、堅定、獨立、好奇心重、易於成功\n缺點:傲慢、忽視他人情感、憤世嫉俗、競爭性強、缺乏浪漫")
+        send_text_message(reply_token, "你是指揮官人格 ENTJ\n優點:有效率、充滿活力、自信、意志堅定、充滿魅力\n缺點:固執、不能容人、傲慢、沒有耐心、冷酷無情")
         self.ans_to_user()
 
     def on_enter_ISTJ(self, event):
@@ -281,7 +281,7 @@ class TocMachine(GraphMachine):
     def on_enter_INTP(self, event):
         print("I'm entering INTP")
         reply_token = event.reply_token
-        send_text_message(reply_token, "你是辯論家人格 ENTP\n優點:知識豐富、思想敏銳、善於腦力激盪、精力旺盛、充滿魅力\n缺點:愛唱反調、不能容人、厭惡重複的工作、注意力不集中")
+        send_text_message(reply_token, "你是邏輯學家人格 INTP\n優點:善於分析總結、有大局觀、創造性強、思想開放、客觀、誠實\n缺點:難以敞開心扉、居高臨下、總是懷疑自己、情感上不敏感、厭惡規則束縛")
         self.ans_to_user()
 
     def on_enter_ENTP(self, event):
