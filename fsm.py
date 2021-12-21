@@ -7,7 +7,7 @@ from utils import send_image_message
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
-        # self.machine.get_graph().draw("FSM.png", prog= 'dot')
+        self.machine.get_graph().draw("FSM.png", prog= 'dot')
 
     def user_to_graph(self, event):
         text = event.message.text
