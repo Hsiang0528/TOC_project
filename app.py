@@ -17,8 +17,19 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
+    states=["user", "user_1", "graph","start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
     transitions=[
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "graph",
+            "conditions": "user_to_graph",
+        },
+        {
+            "trigger": "back",
+            "source": "graph",
+            "dest": "user",
+        },
         {
             "trigger": "advance",
             "source": "user",
@@ -213,8 +224,13 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": ["start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
+            "dest": "user_1",
+            "conditions": "go_to_user_1",
+        },
+        {
+            "trigger": "uu",
+            "source": "user_1",
             "dest": "user",
-            "conditions": "go_to_user",
         },
     ],
     initial="user",
@@ -295,7 +311,7 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             if machine.state == "user" :
-                send_text_message(event.reply_token, "Please type \"START\" to start and you can type\"RESTART\" to restart anytime !")
+                send_text_message(event.reply_token, "Please type \"START\" to start .\nYou can type\"RESTART\" to restart anytime !")
             else :
                 send_text_message(event.reply_token, "Please type valid answer !")
 
