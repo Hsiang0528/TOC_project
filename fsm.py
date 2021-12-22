@@ -3,12 +3,125 @@ from transitions.extensions import GraphMachine
 from utils import send_text_message
 from utils import send_image_message
 
+import requests
 
+# pip install requests
+
+
+keyword = ["牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座", "摩羯座", "水瓶座", "雙魚座", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
         # self.machine.get_graph().draw("FSM.png", prog= 'dot')
 
+    # 貓狗辨識
+    # def user_to_pet(self, event):
+    #     text = event.message.text
+    #     return text.lower() == "pet"
+
+    # def on_enter_pet(self, event):
+    #     print("I'm entering pet")
+    #     reply_token = event.reply_token
+    #     send_text_message(reply_token, "Please send pet's image!")
+
+    # def pet_to_pet2(self, event):
+    #     return event.message.type == 'image'
+
+
+    # def on_enter_pet2(self, event):
+    #         net = load_model('model.h5')
+    #         cls_list = ['cat', 'dog']
+        
+    #         path = './petImages/test/' +cls_list[random.randint(0,1)] + '/' + text + '.jpg'
+
+    #         showimg = cv2.imread(path)
+    #         img = image.load_img(path, target_size=(224, 224))
+    #         # 圖像欲處理
+    #         x = image.img_to_array(img)
+    #         x = np.expand_dims(x, axis=0)
+
+    #         # 對圖像進行分類
+    #         preds = net.predict(x)
+    #         cv2.imshow(cls_list[int(np.argmax(preds, axis=1))],showimg)
+    #         self.pet_to_user()
+    
+    # 心理測驗
+    def user_to_fortune(self, event):
+        text = event.message.text
+        return text.lower() == "fortune"
+    
+    def on_enter_fortune(self, event):
+        print("I'm entering fortune")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "請輸入你的星座:\n牡羊座 請輸入0\n金牛座 請輸入1\n雙子座 請輸入2\n巨蟹座 請輸入3\n獅子座 請輸入4\n處女座 請輸入5\n天秤座 請輸入6\n天蠍座 請輸入7\n射手座 請輸入8\n摩羯座 請輸入9\n水瓶座 請輸入10\n雙魚座 請輸入11")
+    
+    def fortune_to_fortune2(self, event):
+        print("fortune")
+        text = event.message.text
+        return text.lower() in keyword
+    
+    def on_enter_fortune2(self, event):
+        print(event.message.text)
+        i=0
+        if(len(event.message.text)==3):
+            i=0
+            for key in keyword:
+                if(key == event.message.text):
+                    break
+                i=i+1
+        else :
+            i=int(event.message.text)
+
+        reply_token = event.reply_token
+        if (i==12):
+            send_message(reply_token, canmessage)
+            self.go_back()
+            return
+        reply_arr = []
+
+        str_arr = keyword[i]+"\n\n"
+
+        res = requests.get("https://astro.click108.com.tw/daily_"+str(i)+".php?iAstro="+str(i))
+        
+        pos = res.text[res.text.find('love.png'):res.text.find('love.png')+200]
+        pos = pos[pos.find('LIGHT">'):pos.find('LIGHT">')+100]
+
+        star =""
+        for i in range (0, int(pos[pos.find('icon')+5:pos.find('.png')])):
+            star =star+"★"
+        for i in range (0, 5-int(pos[pos.find('icon')+5:pos.find('.png')])):
+            star =star+"☆"
+        str_arr = str_arr + "愛情運勢: "+star+"\n\n"
+
+        pos = res.text[res.text.find('work.png'):res.text.find('work.png')+200]
+        pos = pos[pos.find('LIGHT">'):pos.find('LIGHT">')+100]
+
+        star =""
+        for i in range (0, int(pos[pos.find('icon')+5:pos.find('.png')])):
+            star =star+"★"
+        for i in range (0, 5-int(pos[pos.find('icon')+5:pos.find('.png')])):
+            star =star+"☆"
+        str_arr = str_arr +"工作運勢: "+star+"\n\n"
+
+        pos = res.text[res.text.find('all.png'):res.text.find('all.png')+200]
+        pos = pos[pos.find('LIGHT">'):pos.find('LIGHT">')+100]
+
+        star =""
+        for i in range (0, int(pos[pos.find('icon')+5:pos.find('.png')])):
+            star =star+"★"
+        for i in range (0, 5-int(pos[pos.find('icon')+5:pos.find('.png')])):
+            star =star+"☆"
+        str_arr = str_arr + "整體運勢: "+star+"\n\n"
+
+        str_arr = str_arr + "幸運數字: "+res.text[res.text.find('"NUMERAL">')+10:res.text.find('"NUMERAL">')+11]+"\n\n"
+
+        pos = res.text[res.text.find('title02.png')+52:res.text.find('title02.png')+90]
+
+        str_arr = str_arr + "幸運顏色: "+pos[pos.find("<h4>")+4:pos.find("</h4>")]+"\n\n資料來源:科技紫微網" 
+
+        send_text_message(reply_token, str_arr)
+        self.fortune2_to_user()
+    # 畫圖
     def user_to_graph(self, event):
         text = event.message.text
         return text.lower() == "graph"
@@ -16,6 +129,8 @@ class TocMachine(GraphMachine):
     def user_to_start(self, event):
         text = event.message.text
         return text.lower() == "start"
+
+    # 心理測驗
     # 第一題
     def start_to_I(self, event):
         text = event.message.text

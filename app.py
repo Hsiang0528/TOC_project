@@ -17,8 +17,45 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "user_1", "graph","start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
+    states=["user", "pet", "pet2","fortune", "fortune2","user_1", "graph","start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
     transitions=[
+        # # 寵物
+        # {
+        #     "trigger": "advance",
+        #     "source": "user",
+        #     "dest": "pet",
+        #     "conditions": "user_to_pet",
+        # },
+        # {
+        #     "trigger": "advance",
+        #     "source": "pet",
+        #     "dest": "pet2",
+        #     "conditions": "pet_to_pet2",
+        # },
+        # {
+        #     "trigger": "pet2_to_user",
+        #     "source": "pet2",
+        #     "dest": "user",
+        # },
+        # 運勢
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "fortune",
+            "conditions": "user_to_fortune",
+        },
+        {
+            "trigger": "advance",
+            "source": "fortune",
+            "dest": "fortune2",
+            "conditions": "fortune_to_fortune2",
+        },
+        {
+            "trigger": "fortune2_to_user",
+            "source": "fortune2",
+            "dest": "user",
+        },
+        # FSM圖
         {
             "trigger": "advance",
             "source": "user",
@@ -30,6 +67,7 @@ machine = TocMachine(
             "source": "graph",
             "dest": "user",
         },
+        # 心理測驗
         {
             "trigger": "advance",
             "source": "user",
@@ -311,7 +349,7 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             if machine.state == "user" :
-                send_text_message(event.reply_token, "Please type \"START\" to start .\nYou can type\"RESTART\" to restart anytime !")
+                send_text_message(event.reply_token, "Please type \"START\" to start 心理測驗.\nPlesae type \"FORTUNE\" to start 今日星座運勢\nYou can type\"RESTART\" to restart anytime !")
             else :
                 send_text_message(event.reply_token, "Please type valid answer !")
 
