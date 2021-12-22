@@ -2,6 +2,8 @@ from transitions.extensions import GraphMachine
 
 from utils import send_text_message
 from utils import send_image_message
+from utils import send_button_message
+from linebot.models import MessageTemplateAction
 
 import requests
 
@@ -12,8 +14,27 @@ keyword = ["牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
-        # self.machine.get_graph().draw("FSM.png", prog= 'dot')
+        self.machine.get_graph().draw("FSM.png", prog= 'dot')
 
+    def user_to_main(self, event):
+        text = event.message.text
+        return text.lower() != "graph"
+    
+    def on_enter_main(self, event):
+        title = "請選擇功能"
+        text = "請選擇功能"
+        btn = [
+            MessageTemplateAction(
+                label = "心理測驗",
+                text = "start"
+            ),
+            MessageTemplateAction(
+                label = "星座運勢",
+                text = "fortune"
+            )
+        ]
+        url = 'https://upload.cc/i1/2021/12/23/YWmdDu.png'
+        send_button_message(event.reply_token, title, text, btn, url)
     # 貓狗辨識
     # def user_to_pet(self, event):
     #     text = event.message.text
@@ -46,7 +67,7 @@ class TocMachine(GraphMachine):
     #         self.pet_to_user()
     
     # 心理測驗
-    def user_to_fortune(self, event):
+    def main_to_fortune(self, event):
         text = event.message.text
         return text.lower() == "fortune"
     
@@ -126,7 +147,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "graph"
 
-    def user_to_start(self, event):
+    def main_to_start(self, event):
         text = event.message.text
         return text.lower() == "start"
 
@@ -263,7 +284,7 @@ class TocMachine(GraphMachine):
         print("I'm entering graph")
 
         reply_token = event.reply_token
-        send_image_message(reply_token, "https://upload.cc/i1/2021/12/23/wUWD6J.png")
+        send_image_message(reply_token, "https://upload.cc/i1/2021/12/23/7YH2aw.png")
         # https://upload.cc/i1/2021/12/21/k4qsxn.png
         self.back()
     #

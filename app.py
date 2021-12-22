@@ -17,8 +17,14 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "pet", "pet2","fortune", "fortune2","user_1", "graph","start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
+    states=["user", "main","fortune", "fortune2","user_1", "graph","start", "I","E","IN","IS","EN","ES","INT","IST","ENT","EST","INF","ISF","ENF","ESF","INTJ","ISTJ","ENTJ","ESTJ","INFJ","ISFJ","ENFJ","ESFJ","INTP","ISTP","ENTP","ESTP","INFP","ISFP","ENFP","ESFP"],
     transitions=[
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "main",
+            "conditions": "user_to_main",
+        },
         # # 寵物
         # {
         #     "trigger": "advance",
@@ -40,9 +46,9 @@ machine = TocMachine(
         # 運勢
         {
             "trigger": "advance",
-            "source": "user",
+            "source": "main",
             "dest": "fortune",
-            "conditions": "user_to_fortune",
+            "conditions": "main_to_fortune",
         },
         {
             "trigger": "advance",
@@ -70,9 +76,9 @@ machine = TocMachine(
         # 心理測驗
         {
             "trigger": "advance",
-            "source": "user",
+            "source": "main",
             "dest": "start",
-            "conditions": "user_to_start",
+            "conditions": "main_to_start",
         },
         {
             "trigger": "advance",
@@ -349,7 +355,7 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             if machine.state == "user" :
-                send_text_message(event.reply_token, "Please type \"START\" to start 心理測驗.\nPlesae type \"FORTUNE\" to start 今日星座運勢\nYou can type\"RESTART\" to restart anytime !")
+                send_text_message(event.reply_token, "Please type anything !")
             else :
                 send_text_message(event.reply_token, "Please type valid answer !")
 
