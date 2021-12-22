@@ -14,7 +14,7 @@ keyword = ["牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
-        self.machine.get_graph().draw("FSM.png", prog= 'dot')
+        # self.machine.get_graph().draw("FSM.png", prog= 'dot')
 
     def user_to_main(self, event):
         text = event.message.text
