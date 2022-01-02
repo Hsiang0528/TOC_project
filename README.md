@@ -3,22 +3,29 @@
 這是一個生活小幫手
 可以做簡易的心理測驗及星座運勢測驗
 
-好友介面:
+
+                                                      好友介面
+						      
 ![main](https://user-images.githubusercontent.com/92910688/147869373-c4d457d4-9227-4162-862d-002e8ef0a96b.jpg)
 
-主介面:
+                                                       主介面
+						       
 ![主畫面](https://user-images.githubusercontent.com/92910688/147869364-13fb1080-378f-4855-80de-f1698f204309.jpg)
 
-心理測驗:
+                                                      心理測驗
+						      
 ![心理測驗](https://user-images.githubusercontent.com/92910688/147869386-d94ec599-6eaf-4354-a0ed-a5f6b77c2c28.jpg)
 
-星座運勢:
+                                                       星座運勢
+						       
 ![星座運勢](https://user-images.githubusercontent.com/92910688/147869391-d47a78c3-93ff-41de-94bb-d14a18513931.jpg)
 
-顯示FSM graph:
+                                                     顯示FSM graph
+						     
 ![graph](https://user-images.githubusercontent.com/92910688/147869405-388517d7-690c-43fb-802d-ab1bd7361496.jpg)
 
-FSM狀態圖:
+                                                       FSM狀態圖
+						       
 ![FSM](https://user-images.githubusercontent.com/92910688/147869396-e7d1219c-e9a2-4f11-8f32-19621906d6da.jpg)
 
 user state : 可輸入任意文字到主介面(main state)，或是輸入graph傳送FSM狀態圖
