@@ -29,6 +29,7 @@
 ![FSM](https://user-images.githubusercontent.com/92910688/147869396-e7d1219c-e9a2-4f11-8f32-19621906d6da.jpg)
 
 user state : 可輸入任意文字到主介面(main state)，或是輸入graph傳送FSM狀態圖
+
 main state : 點選心理測驗button並自動回復"start"，開始心理測驗。或是點選星座運勢buttton並自動回覆"fortune"，開始星座運勢測驗。
 
 心理測驗    : 共四題各2個選項，最終有16種不同的心理人格，共31個state。
